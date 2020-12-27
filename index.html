@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MeetDocs</title>
+    <meta name="description" content="A meeting website that allows you to take voice notes and write text messages and convey them to others.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Bootstrap CDN CSS -->
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- Image is taken from https://www.google.com/imgres?imgurl=https%3A%2F%2Fehq-production-us-california.imgix.net%2F3aa184fc578b28f2551285532bb84326503960ad%2Fprojects%2Fimages%2F000%2F002%2F142%2Foriginal%2Frunning-effective-meeting.jpg%3Fauto%3Dcompress%252Cformat%26w%3D1080&imgrefurl=https%3A%2F%2Fourwdm.com%2Fmeeting-in-a-box&tbnid=r9X_nD3tl3X70M&vet=12ahUKEwi1quGK_O3tAhXfwnMBHfl5BjcQMygRegUIARDwAQ..i&docid=-CnrJPr-SRKh4M&w=1080&h=720&q=Meeting&client=ubuntu&ved=2ahUKEwi1quGK_O3tAhXfwnMBHfl5BjcQMygRegUIARDwAQ
+     -->
+     <!-- Code reference is taken from https://veewom.com/articles/how-to-download-html-content-as-pdf-file-using-javascript.htm
+     -->
+    <div class="container-fluid align-center">
+        <img src="assets/img/index.jpeg" alt="MeetDocs">
+        <h1>MeetDocs</h1>
+        <p>A meeting website that allows you to take voice notes and write text messages and convey them to others.</p>
+        <hr>
+        <h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
+        <div class="app">
+            <div class="row">
+                    <div class="col-md-4 align-center">
+                        <h2>Add New Voice Note</h2>
+                            <div class="input-single">
+                                <textarea id="note-textarea" placeholder="Create a new note using voice recognition." rows="6"></textarea>
+                            </div>
+                            <button id="start-record-btn" class="btn-success" title="Start Recording">Start Recognition</button>
+                            <button id="stop-record-btn" class="btn-warning" title="Pause Recording">Stop Recognition</button>
+                            <button id="save-note-btn" class="btn-info" title="Save Note">Save Note</button>
+                            <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access for converting meeting audio into text.</p>
+                    </div>
+                    <div class="col-md-4 align-center">
+                        <div id="print">
+                            <h2>My Voice Notes</h2>
+                            <ul id="notes">
+                                <li>
+                                    <p class="no-notes">You don't have any notes.</p>
+                                </li>
+                            </ul>
+                        </div>
+                       
+                        <div id="print-btn"></div>
+                        <button id="submit" class="btn btn-info" title="Download Meeting Text">Download Meeting Text</button>
+                    </div>
+                    <div class="col-md-4 align-center">
+                        <h2>Chatbox for converting text into audio/speech.</h2>
+
+                        <div>
+                            <label class="container-radio">English
+                                <input type="radio" value="1" name="language" checked onclick="charCount()">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container-radio">Mandarin
+                                <input type="radio" value="0" name="language" onclick="charCount()">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="text-center">
+                            <div style="position: relative;">
+                                <div class="text-box">
+                                    <textarea style="resize: none" placeholder="Put some text here to convert to speech.."
+                                        name="query" id="query" class="query txt-area"></textarea>
+                                </div>
+                                <button class="btn-solid btn-warning mt-3 " onclick="cleartextboxes()">
+                                    <span class="reset"><em>Clear</em></span>
+                                </button>
+                            </div>
+                            <div class="mt-2" id="count">
+                                <span>Characters left : 0/2000</span>
+                            </div>
+                            <button class="btn-solid btn-info mt-3 txt-to-speech" onclick="keyPressMe()"><span class="p-LR-1">Convert to
+                                    Speech </span><i class="fa fa-caret-right"></i></button>
+                            <button class="btn-solid btn-info mt-3 bg-fade speech-processing" style="display:none;"><span
+                                    class="p-LR-1">Processing
+                                </span><i class="fa fa-spinner fa-spin"></i></button>
+        
+                            <div class="audio-box mt-4">
+                                <div id="demo">
+                                    <audio id="audio" onclick="playAudio()" controls>
+                                        <source src="" type='audio/mp3'>
+                                    </audio>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <!-- /row -->
+            </div>
+        <!-- /app -->
+        </div>
+
+    <div id="footer">
+        <div class="clearfix1">
+            <div class="container">
+                <div class="row">
+
+                    <div class="center">
+                        <p>MeetDocs 2020</p>
+                    </div>
+
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+    </div>
+    <!-- /footer -->
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/tts.js"></script>
+
+    <script>
+        $(".txt-to-speech").attr('disabled', true);
+        $(".txt-area").on('keyup', function () {
+            if ($(this).val() != '') {
+                $(".txt-to-speech").attr('disabled', false);
+            } else {
+                $(".txt-to-speech").attr('disabled', true);
+            }
+        });
+    </script>
+    <script>
+    var doc = new jsPDF();
+    var specialElementHandlers = {
+        '#print-btn': function (element, renderer) {
+            return true;
+        }
+    };
+    
+    $('#submit').click(function () {
+        doc.fromHTML($('#print').html(), 15, 15, {
+            'width': 170,
+                'elementHandlers': specialElementHandlers
+        });
+        doc.save('MeetingInfo.pdf');
+    });
+    </script>
+</body>
+
+</html>
