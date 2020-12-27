@@ -1,6 +1,10 @@
 # MeetDocs
 A meeting website that allows you to take voice notes and write text messages and convey them to others.
 
+
+Additional Note: Run this website in google chrome to avoid any issue.
+
+
 Download or clone the repository.
 Run the index.html
 
